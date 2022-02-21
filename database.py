@@ -7,6 +7,10 @@ config = {'user': 'root', 'password': 'ArnoSuckt', 'host' : '10.10.12.50', 'data
 conn = mysql.connector.connect(**config)
 cursor = conn.cursor()
 
+def getNaam(nummer):
+	cursor.execute("SELECT naam FROM kaarten WHERE nummer = " + nummer + ";")
+	return cursor.fetchall()
+
 def read(naam, code):
 	cursor.execute("SELECT code FROM users WHERE naam = " + naam + ";")
 	if (cursor.fetchall() == code):
