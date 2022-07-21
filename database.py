@@ -2,7 +2,7 @@
 
 import mysql.connector
 
-config = {'user': 'vanhouckedre_bechiro', 'password': 'ArnoSuckt', 'host' : 'vanhouckedre.be.mysql:69', 'database': 'vanhouckedre_bechiro'}
+config = {'user': 'vanhouckedre_bechiro', 'password': 'ArnoSuckt', 'host' : 'vanhouckedre.be.mysql:69', 'database': 'vanhouckedre_bechiro', 'port' : '69'}
 
 conn = mysql.connector.connect(**config)
 cursor = conn.cursor()
