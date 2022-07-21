@@ -98,4 +98,4 @@ if __name__ == '__main__':
         digit = kp.getKey()
      
     # Print the result
-    print digit
+    print(digit)
