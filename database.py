@@ -1,4 +1,4 @@
-#! /usr/bin/python2.7
+#! /usr/bin/env python3
 
 import mysql.connector
 
@@ -18,9 +18,24 @@ def read(nummer, code):
 	else:
 		return "Foute code!"
 
-def write(nummer, bedrag, code):
-	cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
-	if (cursor.fetchall() == code):
+def write(nummer, bedrag, code, betalen=True):
+	if betalen:
+		cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
+		if (cursor.fetchall() == code):
+			cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
+			huidigTotaal = cursor.fetchall()
+
+			nieuwTotaal = huidigTotaal - bedrag
+			cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
+			cursor.commit()
+
+			return "Nieuw totaal van " + nummer + " is: " + nieuwTotaal
+			
+		else:
+			return "foute code!"
+
+
+	elif not betalen:
 		cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
 		huidigTotaal = cursor.fetchall()
 
@@ -31,4 +46,4 @@ def write(nummer, bedrag, code):
 		return "Nieuw totaal van " + nummer + " is: " + nieuwTotaal
 	
 	else:
-		return "Foute code!"
+		return "Er is iet fout gegaan!"

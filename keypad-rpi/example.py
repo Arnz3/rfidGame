@@ -10,5 +10,5 @@ while True:
 		digit = None
 		while digit == None:
 			digit = kp.getKey()
-		print digit
+		print(digit)
 		time.sleep(0.5)
