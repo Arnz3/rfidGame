@@ -64,14 +64,15 @@ def storten():
         print("foute code")
 
 
-while True:
-    function = WaitForKeypadInput()
-    if function == "A":
-        print("we gaan betalen")
-        betalen()
-    elif function == "B":
-        print("storten")
-        storten()
-    else:
-        print("not correct function input")
+
+function = WaitForKeypadInput()
+print(f"function is {function}")
+if function == "A":
+    print("we gaan betalen")
+    betalen()
+elif function == "B":
+    print("storten")
+    storten()
+else:
+    print("not correct function input")
 
