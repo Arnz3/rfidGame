@@ -15,6 +15,7 @@ reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
 
 def WaitForKeypadInput():
+    GPIO.setmode(GPIO.BOARD)
     digit = None
     while digit == None:
         digit = kp.getKey()
@@ -31,6 +32,7 @@ def WaitForRfidInput():
 
     
 def KeypadInputWithOk():
+    GPIO.setmode(GPIO.BOARD)
     bedrag = ""
     digit = None
     while digit != "#":
