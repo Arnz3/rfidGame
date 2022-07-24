@@ -45,7 +45,9 @@ def KeypadInputWithOk():
             pass
         else:
             bedrag += str(digit)
+        time.sleep(0.4)
     
+    bedrag -= "#"
     print(f"bedrag is {bedrag}")
     return bedrag
 
