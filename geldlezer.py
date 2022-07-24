@@ -32,6 +32,7 @@ def WaitForRfidInput():
     
 def KeypadInputWithOk():
     bedrag = ""
+    digit = None
     while digit != "#":
         digit = None
         while digit == None:
