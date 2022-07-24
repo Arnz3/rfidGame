@@ -19,11 +19,13 @@ def WaitForKeypadInput():
     while digit == None:
         digit = kp.getKey()
 
+    print("digit")
     return digit
 
 
 def WaitForRfidInput():
     id, text = reader.read()
+    print(id)
     GPIO.cleanup()
     return id
 
@@ -42,10 +44,14 @@ def KeypadInputWithOk():
 
 
 def betalen():
+    print("bedrag")
     bedrag = KeypadInputWithOk()
+    print("scan kaart")
     card = WaitForRfidInput()
+    print("fix code")
     code = KeypadInputWithOk()
     database.write(card, bedrag, code)
+    print("done")
 
 
 def storten():
@@ -61,8 +67,10 @@ def storten():
 while True:
     function = WaitForKeypadInput()
     if function == "A":
+        print("we gaan betalen")
         betalen()
     elif function == "B":
+        print("storten")
         storten()
     else:
         print("not correct function input")
