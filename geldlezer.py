@@ -34,7 +34,9 @@ def KeypadInputWithOk():
     digit = None
     bedrag = ""
     while digit != "#":
-        digit = kp.getKey()
+        while digit == None:
+            digit = kp.getKey()
+            
         if digit == "D":
             pass
         else:
