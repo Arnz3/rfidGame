@@ -32,7 +32,7 @@ def write(nummer, bedrag, code, betalen=True):
 
 			nieuwTotaal = str(int(huidigTotaal) - int(bedrag))
 			cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
-			cursor.commit()
+			conn.commit()
 
 			print("Nieuw totaal van " + nummer + " is: " + nieuwTotaal)
 			
@@ -46,7 +46,7 @@ def write(nummer, bedrag, code, betalen=True):
 
 		nieuwTotaal = str(int(huidigTotaal) + int(bedrag))
 		cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
-		cursor.commit()
+		conn.commit()
 
 		print("Nieuw totaal van " + nummer + " is: " + nieuwTotaal)
 	
