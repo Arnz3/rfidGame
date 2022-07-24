@@ -64,11 +64,16 @@ def betalen():
 
 
 def storten():
+    print("fix code")
     code = KeypadInputWithOk()
     if code == SUPERSECRETCODE:
+        time.sleep(0.5)
+        print("ait bedrag")
         bedrag = KeypadInputWithOk()
+        print("cardje pls")
         card = WaitForRfidInput()
         database.write(card, bedrag, "0000", False)
+        print("goeidd")
     else:
         print("foute code")
 
@@ -82,6 +87,7 @@ if function == "A":
     betalen()
 elif function == "B":
     print("storten")
+    time.sleep(0.5)
     storten()
 else:
     print("not correct function input")
