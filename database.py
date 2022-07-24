@@ -9,9 +9,11 @@ conn = mysql.connector.connect(**config)
 cursor = conn.cursor()
 
 def read(nummer, code):
-	cursor.execute("SELECT code FROM rfid WHERE naam = " + nummer + ";")
+	nummer = str(nummer)
+	code = str(code)
+	cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
 	if (cursor.fetchall() == code):
-		cursor.execute("SELECT bedrag FROM rfid WHERE naam = " + nummer + ";")
+		cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
 		huidigTotaal = cursor.fetchall()
 
 		return "totaal van " + nummer + " is: " + huidigTotaal
@@ -20,13 +22,15 @@ def read(nummer, code):
 		return "Foute code!"
 
 def write(nummer, bedrag, code, betalen=True):
+	nummer = str(nummer)
+	code = str(code)
 	if betalen:
 		cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
 		if (cursor.fetchall() == code):
 			cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
 			huidigTotaal = cursor.fetchall()
 
-			nieuwTotaal = huidigTotaal - bedrag
+			nieuwTotaal = str(huidigTotaal - bedrag)
 			cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
 			cursor.commit()
 
@@ -40,7 +44,7 @@ def write(nummer, bedrag, code, betalen=True):
 		cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
 		huidigTotaal = cursor.fetchall()
 
-		nieuwTotaal = huidigTotaal + bedrag
+		nieuwTotaal = str(huidigTotaal + bedrag)
 		cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
 		cursor.commit()
 
