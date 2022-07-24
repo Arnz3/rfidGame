@@ -16,10 +16,10 @@ def read(nummer, code):
 		cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
 		huidigTotaal = cursor.fetchall()
 
-		return "totaal van " + nummer + " is: " + huidigTotaal
+		print("totaal van " + nummer + " is: " + huidigTotaal)
 
 	else:
-		return "Foute code!"
+		print("Foute code!")
 
 def write(nummer, bedrag, code, betalen=True):
 	nummer = str(nummer)
@@ -34,10 +34,10 @@ def write(nummer, bedrag, code, betalen=True):
 			cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
 			cursor.commit()
 
-			return "Nieuw totaal van " + nummer + " is: " + nieuwTotaal
+			print("Nieuw totaal van " + nummer + " is: " + nieuwTotaal)
 			
 		else:
-			return "foute code!"
+			print("foute code!")
 
 
 	elif not betalen:
@@ -48,7 +48,7 @@ def write(nummer, bedrag, code, betalen=True):
 		cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
 		cursor.commit()
 
-		return "Nieuw totaal van " + nummer + " is: " + nieuwTotaal
+		print("Nieuw totaal van " + nummer + " is: " + nieuwTotaal)
 	
 	else:
-		return "Er is iet fout gegaan!"
+		print("Er is iet fout gegaan!")
