@@ -5,7 +5,7 @@ from keypad import keypad
 GPIO.setwarnings(False)
 while True:
 	if __name__ == "__main__":
-		kp = keypad(columnCount=3)
+		kp = keypad(columnCount=4)
 
 		digit = None
 		while digit == None:

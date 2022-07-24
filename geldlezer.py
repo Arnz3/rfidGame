@@ -19,7 +19,7 @@ def WaitForKeypadInput():
     while digit == None:
         digit = kp.getKey()
 
-    print("digit")
+    print(digit)
     return digit
 
 
