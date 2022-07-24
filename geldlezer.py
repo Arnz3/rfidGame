@@ -36,7 +36,8 @@ def KeypadInputWithOk():
     while digit != "#":
         while digit == None:
             digit = kp.getKey()
-            
+
+        print(digit)
         if digit == "D":
             pass
         else:
