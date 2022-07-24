@@ -26,8 +26,8 @@ def write(nummer, bedrag, code, betalen=True):
 	code = str(code)
 	if betalen:
 		cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
-		print(cursor.fetchall()[0])
-		if (cursor.fetchall() == code):
+		print(cursor.fetchall()[0][0])
+		if (cursor.fetchall()[0][0] == code):
 			cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
 			huidigTotaal = cursor.fetchall()
 
