@@ -41,7 +41,7 @@ def KeypadInputWithOk():
         if digit == "D":
             pass
         else:
-            bedrag += digit
+            bedrag += str(digit)
     
     print(f"bedrag is {bedrag}")
     return bedrag
