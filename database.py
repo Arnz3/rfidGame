@@ -26,10 +26,9 @@ def write(nummer, bedrag, code, betalen=True):
 	code = str(code)
 	if betalen:
 		cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
-		print(cursor.fetchall()[0][0])
 		if (cursor.fetchall()[0][0] == code):
 			cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
-			huidigTotaal = cursor.fetchall()
+			huidigTotaal = cursor.fetchall()[0][0]
 
 			nieuwTotaal = str(huidigTotaal - bedrag)
 			cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
@@ -43,7 +42,7 @@ def write(nummer, bedrag, code, betalen=True):
 
 	elif not betalen:
 		cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
-		huidigTotaal = cursor.fetchall()
+		huidigTotaal = cursor.fetchall()[0][0]
 
 		nieuwTotaal = str(huidigTotaal + bedrag)
 		cursor.execute("UPDATE rfid SET bedrag = " + nieuwTotaal + " WHERE nummer = " + nummer + ";")
