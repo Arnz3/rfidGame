@@ -42,7 +42,8 @@ def KeypadInputWithOk():
             pass
         else:
             bedrag += digit
-
+    
+    print(f"bedrag is {bedrag}")
     return bedrag
 
 
@@ -72,6 +73,7 @@ function = WaitForKeypadInput()
 print(f"function is {function}")
 if function == "A":
     print("we gaan betalen")
+    time.sleep(0.5)
     betalen()
 elif function == "B":
     print("storten")
