@@ -40,9 +40,12 @@ def WaitForKeypadInput():
 
 
 def WaitForRfidInput():
+    resetThread = threading.Thread(target=starInterrupt)
+    resetThread.start()
     id, text = reader.read()
     print(id)
     GPIO.cleanup()
+    resetThread.join()
     return id
 
 
@@ -55,11 +58,11 @@ def KeypadInputWithOk():
         while digit == None:
             digit = kp.getKey()
 
-        print(digit)
         if digit == "D":
-            pass
+            bedrag = bedrag[:-1]
         else:
             bedrag += str(digit)
+        print(bedrag)
         time.sleep(0.4)
     
     bedrag = bedrag.replace('#', '')
@@ -92,9 +95,6 @@ def storten():
     else:
         print("foute code")
 
-
-resetThread = threading.Thread(target=starInterrupt)
-resetThread.start()
 
 function = WaitForKeypadInput()
 print(f"function is {function}")
