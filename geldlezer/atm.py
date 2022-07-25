@@ -6,13 +6,10 @@ from keypad import keypad
 from mfrc522 import SimpleMFRC522
 import database
 
-SUPERSECRETCODE = "9512"
-
 GPIO.setwarnings(False)
 
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
-
 
 def WaitForKeypadInput():
     GPIO.setmode(GPIO.BOARD)
@@ -52,42 +49,4 @@ def KeypadInputWithOk():
     return bedrag
 
 
-def betalen():
-    print("bedrag")
-    bedrag = KeypadInputWithOk()
-    print("scan kaart")
-    card = WaitForRfidInput()
-    print("fix code")
-    code = KeypadInputWithOk()
-    database.write(card, bedrag, code)
-    print("done")
-
-
-def storten():
-    print("fix code")
-    code = KeypadInputWithOk()
-    if code == SUPERSECRETCODE:
-        time.sleep(0.5)
-        print("ait bedrag")
-        bedrag = KeypadInputWithOk()
-        print("cardje pls")
-        card = WaitForRfidInput()
-        database.write(card, bedrag, "0000", False)
-        print("goeidd")
-    else:
-        print("foute code")
-
-
 function = WaitForKeypadInput()
-print(f"function is {function}")
-if function == "A":
-    print("we gaan betalen")
-    time.sleep(0.5)
-    betalen()
-elif function == "B":
-    print("storten")
-    time.sleep(0.5)
-    storten()
-else:
-    print("not correct function input")
-
