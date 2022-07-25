@@ -1,7 +1,6 @@
 #! /usr/bin/pyhton3
 
 import time
-from unicodedata import digit
 import RPi.GPIO as GPIO
 from keypad import keypad
 from mfrc522 import SimpleMFRC522
