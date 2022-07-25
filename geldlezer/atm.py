@@ -13,10 +13,8 @@ reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
 
 def writeJson(message, bedrag):
-    f = open('../atm/data.json', 'rw')
-    data = json.load(f)
-    data[message] = message
-    data[bedrag] = bedrag
+    f = open('../atm/data.json', 'w')
+    data = {"message" : message, "bedrag" : bedrag}
     json.dump(data, f)
     f.close()
 
