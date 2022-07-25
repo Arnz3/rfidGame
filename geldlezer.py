@@ -1,8 +1,5 @@
 #! /usr/bin/pyhton3
 
-import threading
-import os
-import sys
 import time
 from unicodedata import digit
 import RPi.GPIO as GPIO
@@ -17,17 +14,6 @@ GPIO.setwarnings(False)
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
 
-def starInterrupt():
-    digit = None
-    while digit == None:
-        digit = kp.getKey()
-    
-    if(digit == "*"):
-        print("reset shit")
-        os.execv(sys.argv[0], sys.argv)
-    else:
-        starInterrupt()
-
 
 def WaitForKeypadInput():
     GPIO.setmode(GPIO.BOARD)
@@ -40,12 +26,9 @@ def WaitForKeypadInput():
 
 
 def WaitForRfidInput():
-    resetThread = threading.Thread(target=starInterrupt)
-    resetThread.start()
     id, text = reader.read()
     print(id)
     GPIO.cleanup()
-    resetThread.join()
     return id
 
 
