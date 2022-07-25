@@ -63,7 +63,7 @@ def getTotaal():
     print("fix kaart")
     card = WaitForRfidInput()
     bedrag = database.read(card)
-    print(bedrag)
+    writeJson("Dit is uw totaal bedrag:", bedrag)
 
 
 def schulden():
@@ -72,7 +72,8 @@ def schulden():
     totaalBedragen = 0
     for schuld in schulden:
         totaalBedragen += int(schuld)
-    print(totaalBedragen)
+    totaalschulden = 1000000 - totaalBedragen
+    writeJson("De totale schulden zijn", totaalschulden)
 
 
 print("fix input")
