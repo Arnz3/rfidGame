@@ -1,9 +1,6 @@
 #! /usr/bin/pyhton3
 
 import time
-import threading
-import os
-import sys
 import RPi.GPIO as GPIO
 from keypad import keypad
 from mfrc522 import SimpleMFRC522
@@ -16,16 +13,6 @@ GPIO.setmode(GPIO.BOARD)
 
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
-
-def resetInterrupt():
-    digit = None
-    while digit == None:
-        digit = kp.getKey()
-    
-    if(digit == "*"):
-        os.execv(sys.argv[0], sys.argv)
-    else:
-        resetInterrupt()
 
 
 def WaitForKeypadInput():
@@ -90,9 +77,6 @@ def storten():
     else:
         print("foute code")
 
-
-resetThread = threading.Thread(target=resetInterrupt)
-resetThread.start()
 
 print("fix input")
 function = WaitForKeypadInput()
