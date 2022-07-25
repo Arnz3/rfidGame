@@ -1,6 +1,7 @@
 #! /usr/bin/pyhton3
 
 import time
+import json
 import RPi.GPIO as GPIO
 from keypad import keypad
 from mfrc522 import SimpleMFRC522
@@ -10,6 +11,15 @@ GPIO.setwarnings(False)
 
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
+
+def writeJson(message, bedrag):
+    f = open('../atm/data.json', 'rw')
+    data = json.load(f)
+    data[message] = message
+    data[bedrag] = bedrag
+    json.dump(data, f)
+    f.close()
+
 
 def WaitForKeypadInput():
     GPIO.setmode(GPIO.BOARD)
