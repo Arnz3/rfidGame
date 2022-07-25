@@ -19,7 +19,7 @@ def read(nummer):
 
 
 def readall():
-	cursor.execure("SELECT bedrag FROM rfid")
+	cursor.execute("SELECT bedrag FROM rfid")
 	bedragen = cursor.fetchall()
 
 	return bedragen
