@@ -59,7 +59,10 @@ def getTotaal():
 def schulden():
     print("schulden")
     schulden = database.readall()
-    print(schulden)
+    totaalBedragen = 0
+    for schuld in schulden:
+        totaalBedragen += int(schuld)
+    print(totaalBedragen)
 
 
 print("fix input")

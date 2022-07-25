@@ -22,7 +22,7 @@ def readall():
 	cursor.execute("SELECT bedrag FROM rfid")
 	bedragen = cursor.fetchall()
 
-	return bedragen
+	return bedragen[0]
 
 
 def write(nummer, bedrag, code, betalen=True):
