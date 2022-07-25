@@ -1,4 +1,4 @@
-#! /usr/bin/pyhton3
+#! /usr/bin/python3
 
 import time
 import RPi.GPIO as GPIO
@@ -78,6 +78,7 @@ def storten():
         print("foute code")
 
 
+print("Fix input")
 function = WaitForKeypadInput()
 print(f"function is {function}")
 if function == "A":
