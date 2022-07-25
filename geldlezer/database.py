@@ -8,18 +8,22 @@ config = {'user': 'arno', 'password': 'test1234', 'host' : '192.168.0.125', 'dat
 conn = mysql.connector.connect(**config)
 cursor = conn.cursor()
 
-def read(nummer, code):
+def read(nummer):
 	nummer = str(nummer)
-	code = str(code)
-	cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
-	if (cursor.fetchall() == code):
-		cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
-		huidigTotaal = cursor.fetchall()
+	
+	cursor.execute("SELECT bedrag FROM rfid WHERE nummer = " + nummer + ";")
+	huidigTotaal = cursor.fetchall()[0][0]
 
-		print("totaal van " + nummer + " is: " + huidigTotaal)
+	print("totaal van " + nummer + " is: " + huidigTotaal)
+	return huidigTotaal
 
-	else:
-		print("Foute code!")
+
+def readall():
+	cursor.execure("SELECT bedrag FROM rfid")
+	bedragen = cursor.fetchall()
+
+	return bedragen
+
 
 def write(nummer, bedrag, code, betalen=True):
 	nummer = str(nummer)

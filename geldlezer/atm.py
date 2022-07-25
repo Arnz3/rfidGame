@@ -49,4 +49,25 @@ def KeypadInputWithOk():
     return bedrag
 
 
+def getTotaal():
+    print("fix kaart")
+    card = WaitForRfidInput()
+    bedrag = database.read(card)
+    print(bedrag)
+
+
+def schulden():
+    print("schulden")
+    schulden = database.readall()
+    print(schulden)
+
+
+print("fix input")
 function = WaitForKeypadInput()
+if function == "A":
+    print("ait totaal ja")
+    getTotaal()
+if function == "B":
+    schulden()
+if function == "C":
+    pass
