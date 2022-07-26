@@ -76,7 +76,7 @@ def KeypadInputWithOk():
 
 
 def getTotaal():
-    print("fix kaart")
+    writehtml("scan uw kaart", "SQUID BANK")
     card = WaitForRfidInput()
     bedrag = database.read(card)
     writehtml("Dit is uw totaal bedrag:", bedrag)
@@ -93,13 +93,13 @@ def schulden():
 
 
 def storten():
-    print("fix code")
+    writehtml("voor de super geheime code in", "SQUID BANK")
     code = KeypadInputWithOk()
     if code == SUPERSECRETCODE:
         time.sleep(0.5)
-        print("ait bedrag")
+        writehtml("welk bedrag wil u storten", "SQUID BANK")
         bedrag = KeypadInputWithOk()
-        print("cardje pls")
+        writehtml("scan uw kaart", "SQUIDBANK")
         card = WaitForRfidInput()
         database.write(card, bedrag, "0000", False)
         writehtml("Dit bedrag is op uw rekening gestort", bedrag)
