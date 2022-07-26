@@ -6,7 +6,7 @@ from keypad import keypad
 from mfrc522 import SimpleMFRC522
 import database as database
 
-SUPERSECRETCODE = "9512"
+SUPERSECRETCODE = "6969"
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)

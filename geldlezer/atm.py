@@ -7,6 +7,8 @@ from keypad import keypad
 from mfrc522 import SimpleMFRC522
 import database
 
+SUPERSECRETCODE = "6969"
+
 GPIO.setwarnings(False)
 
 reader = SimpleMFRC522()
@@ -86,8 +88,23 @@ def schulden():
     totaalBedragen = 0
     for schuld in schulden:
         totaalBedragen += int(schuld)
-    totaalschulden = 1000000 - totaalBedragen
+    totaalschulden = 99999999999999999999999 - totaalBedragen
     writehtml("De totale schulden zijn", totaalschulden)
+
+
+def storten():
+    print("fix code")
+    code = KeypadInputWithOk()
+    if code == SUPERSECRETCODE:
+        time.sleep(0.5)
+        print("ait bedrag")
+        bedrag = KeypadInputWithOk()
+        print("cardje pls")
+        card = WaitForRfidInput()
+        database.write(card, bedrag, "0000", False)
+        print("goeidd")
+    else:
+        print("foute code")
 
 
 print("fix input")
@@ -98,4 +115,4 @@ if function == "A":
 if function == "B":
     schulden()
 if function == "C":
-    pass
+    storten()
