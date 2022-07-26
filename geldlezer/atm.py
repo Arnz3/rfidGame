@@ -106,13 +106,16 @@ def storten():
     else:
         writehtml("dit is een super geheime code", "FOUTE CODE!")
 
-
-print("fix input")
-function = WaitForKeypadInput()
-if function == "A":
-    print("ait totaal ja")
-    getTotaal()
-if function == "B":
-    schulden()
-if function == "C":
-    storten()
+while True:
+    print("fix input")
+    function = WaitForKeypadInput()
+    if function == "A":
+        print("ait totaal ja")
+        getTotaal()
+    if function == "B":
+        schulden()
+    if function == "C":
+        storten()
+    
+    time.sleep(5)
+    writehtml("welkom bij de geld machine", "SQUID BANK")
