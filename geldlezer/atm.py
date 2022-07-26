@@ -102,9 +102,9 @@ def storten():
         print("cardje pls")
         card = WaitForRfidInput()
         database.write(card, bedrag, "0000", False)
-        print("goeidd")
+        writehtml("Dit bedrag is op uw rekening gestort", bedrag)
     else:
-        print("foute code")
+        writehtml("dit is een super geheime code", "FOUTE CODE!")
 
 
 print("fix input")
