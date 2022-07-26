@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 from keypad import keypad
 from mfrc522 import SimpleMFRC522
 import database
+import webbrowser
 
 SUPERSECRETCODE = "6969"
 
@@ -105,6 +106,8 @@ def storten():
         writehtml("Dit bedrag is op uw rekening gestort", bedrag)
     else:
         writehtml("dit is een super geheime code", "FOUTE CODE!")
+
+webbrowser.open('file:///home/pi/Desktop/rfidGame/atm/index.html')
 
 while True:
     print("fix input")
