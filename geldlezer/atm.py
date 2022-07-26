@@ -12,11 +12,27 @@ GPIO.setwarnings(False)
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
 
-def writeJson(message, bedrag):
-    f = open('../atm/data.json', 'w')
-    data = {"message" : message, "bedrag" : bedrag}
-    json.dump(data, f)
-    f.close()
+def writehtml(message, bedrag):
+    f = open('../atm/index.html', 'w')
+    html =  f'''<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link rel="stylesheet" href="style.css">
+                    <title>ATM</title>
+                </head>
+                <body onLoad="timeRefresh(2000);">
+                    <div class="content">
+                        <h3 id="message">{message}</h3>
+                        <h1 id="bedrag">{bedrag}</h1>
+                    </div>
+                    <script src="script.js"></script>
+                </body>
+                </html>'''
+    f.write(html)
+    f.close
 
 
 def WaitForKeypadInput():
@@ -61,7 +77,7 @@ def getTotaal():
     print("fix kaart")
     card = WaitForRfidInput()
     bedrag = database.read(card)
-    writeJson("Dit is uw totaal bedrag:", bedrag)
+    writehtml("Dit is uw totaal bedrag:", bedrag)
 
 
 def schulden():
@@ -71,7 +87,7 @@ def schulden():
     for schuld in schulden:
         totaalBedragen += int(schuld)
     totaalschulden = 1000000 - totaalBedragen
-    writeJson("De totale schulden zijn", totaalschulden)
+    writehtml("De totale schulden zijn", totaalschulden)
 
 
 print("fix input")
