@@ -94,11 +94,11 @@ def schulden():
 
 
 def storten():
-    writehtml("voor de super geheime code in", "SQUID BANK")
+    writehtml("voer de super geheime code in", "SQUID BANK")
     code = KeypadInputWithOk()
     if code == SUPERSECRETCODE:
         time.sleep(0.5)
-        writehtml("welk bedrag wil u storten", "SQUID BANK")
+        writehtml("welk bedrag wilt u storten", "SQUID BANK")
         bedrag = KeypadInputWithOk()
         writehtml("scan uw kaart", "SQUIDBANK")
         card = WaitForRfidInput()
