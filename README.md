@@ -34,7 +34,7 @@ sudo pip3 install mfrc522
 mysql.connector
 ```
 sudo pip3 install mysql-connector
-
+```
 
 ## pin layout
 
