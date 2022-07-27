@@ -11,6 +11,14 @@ SUPERSECRETCODE = "6969"
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 
+redLed = 11
+yellowLed = 13
+greenLed = 15
+
+GPIO.setup(redLed, GPIO.OUT)
+GPIO.setup(yellowLed, GPIO.OUT)
+GPIO.setup(greenLed, GPIO.OUT)
+
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
 
@@ -54,33 +62,77 @@ def KeypadInputWithOk():
 
 def betalen():
     print("bedrag")
+    # groen lampje aan
+    GPIO.output(greenLed, GPIO.HIGH)
     bedrag = KeypadInputWithOk()
     print("scan kaart")
+    GPIO.output(greenLed, GPIO.LOW)
+
+    # geel lampje aan
+    GPIO.output(yellowLed, GPIO.HIGH) 
     card = WaitForRfidInput()
     print("fix code")
+    # groen en geel lampje aan
+    GPIO.output(greenLed, GPIO.HIGH)
     code = KeypadInputWithOk()
-    database.write(card, bedrag, code)
-    print("done")
+    if(database.write(card, bedrag, code)):
+        print("done")
+        # alle lampjes aan
+        GPIO.output(redLed, GPIO.HIGH)
+        time.sleep(3)
+        GPIO.output(greenLed, GPIO.LOW)
+        GPIO.output(redLed, GPIO.LOW)
+        GPIO.output(yellowLed, GPIO.LOW)
+    else:
+        GPIO.output(greenLed, GPIO.LOW)
+        GPIO.output(yellowLed, GPIO.LOW)
+        GPIO.output(redLed, GPIO.HIGH)
+        time.sleep(3)
+        GPIO.output(redLed, GPIO.LOW)
 
 
 def storten():
     print("fix code")
+    GPIO.output(greenLed, GPIO.HIGH)
+    GPIO.output(yellowLed, GPIO.HIGH)
     code = KeypadInputWithOk()
+    # groen en geel lampje aan 
     if code == SUPERSECRETCODE:
         time.sleep(0.5)
         print("ait bedrag")
+        GPIO.output(yellowLed, GPIO.LOW)
+        # groen lampje aan 
         bedrag = KeypadInputWithOk()
         print("cardje pls")
+        # geel lampje aan
+        GPIO.output(greenLed, GPIO.LOW)
+        GPIO.output(yellowLed, GPIO.HIGH)
         card = WaitForRfidInput()
-        database.write(card, bedrag, "0000", False)
-        print("goeidd")
+        if(database.write(card, bedrag, "0000", False)):
+            print("goeidd")
+            GPIO.output(redLed, GPIO.HIGH)
+            GPIO.output(greenLed, GPIO.HIGH)
+            time.sleep(3)
+            GPIO.output(greenLed, GPIO.LOW)
+            GPIO.output(redLed, GPIO.LOW)
+            GPIO.output(yellowLed, GPIO.LOW)
+            # alle lampjes aan 
     else:
+        # rood lampje aan
+        GPIO.output(greenLed, GPIO.LOW)
+        GPIO.output(yellowLed, GPIO.LOW)
+        GPIO.output(redLed, GPIO.HIGH)
         print("foute code")
+        time.sleep(3)
+        GPIO.output(redLed, GPIO.LOW)
 
 
 print("fix input")
+# groen lampje aan 
+GPIO.output(greenLed, GPIO.HIGH)
 function = WaitForKeypadInput()
 print(f"function is {function}")
+GPIO.output(greenLed, GPIO.LOW)
 if function == "A":
     print("we gaan betalen")
     time.sleep(0.5)
