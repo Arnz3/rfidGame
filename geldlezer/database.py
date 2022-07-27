@@ -31,6 +31,7 @@ def write(nummer, bedrag, code, betalen=True):
 	if betalen:
 		cursor.execute("SELECT code FROM rfid WHERE nummer = " + nummer + ";")
 		results = cursor.fetchall()
+		print(results)
 		if (results == None):
 			return False
 
