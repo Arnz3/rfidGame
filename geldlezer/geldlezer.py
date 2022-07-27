@@ -37,6 +37,9 @@ def WaitForRfidInput():
     print(id)
     GPIO.cleanup()
     GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(redLed, GPIO.OUT)
+    GPIO.setup(yellowLed, GPIO.OUT)
+    GPIO.setup(greenLed, GPIO.OUT)
     return id
 
 
