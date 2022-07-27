@@ -18,6 +18,9 @@ greenLed = 15
 GPIO.setup(redLed, GPIO.OUT)
 GPIO.setup(yellowLed, GPIO.OUT)
 GPIO.setup(greenLed, GPIO.OUT)
+GPIO.output(greenLed, GPIO.LOW)
+GPIO.output(redLed, GPIO.LOW)
+GPIO.output(yellowLed, GPIO.LOW)
 
 reader = SimpleMFRC522()
 kp = keypad(columnCount=4)
