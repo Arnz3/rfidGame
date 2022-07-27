@@ -126,21 +126,21 @@ def storten():
         time.sleep(3)
         GPIO.output(redLed, GPIO.LOW)
 
-
-print("fix input")
-# groen lampje aan 
-GPIO.output(greenLed, GPIO.HIGH)
-function = WaitForKeypadInput()
-print(f"function is {function}")
-GPIO.output(greenLed, GPIO.LOW)
-if function == "A":
-    print("we gaan betalen")
-    time.sleep(0.5)
-    betalen()
-elif function == "B":
-    print("storten")
-    time.sleep(0.5)
-    storten()
-else:
-    print("not correct function input")
+while True:
+    print("fix input")
+    # groen lampje aan 
+    GPIO.output(greenLed, GPIO.HIGH)
+    function = WaitForKeypadInput()
+    print(f"function is {function}")
+    GPIO.output(greenLed, GPIO.LOW)
+    if function == "A":
+        print("we gaan betalen")
+        time.sleep(0.5)
+        betalen()
+    elif function == "B":
+        print("storten")
+        time.sleep(0.5)
+        storten()
+    else:
+        print("not correct function input")
 
